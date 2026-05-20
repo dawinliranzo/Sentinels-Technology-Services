@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinels Technology Services | Enterprise IT & Cybersecurity</title>
+    <meta name="description" content="Enterprise IT solutions and cybersecurity services. Managed IT, cloud solutions, and 24/7 security monitoring for businesses that demand reliability.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --primary-light: #38bdf8;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --darker: #020617;
+            --dark-card: #1e293b;
+            --dark-border: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient-start: #0ea5e9;
+            --gradient-end: #06b6d4;
+            --shadow-glow: 0 0 40px rgba(14, 165, 233, 0.15);
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        ::selection { background: rgba(14, 165, 233, 0.3); color: var(--text); }
+
+        .bg-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+        }
+        .bg-orb {
+            position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.15;
+            pointer-events: none; z-index: 0; animation: orbFloat 20s ease-in-out infinite;
+        }
+        .bg-orb-1 { width: 600px; height: 600px; background: var(--primary); top: -200px; right: -200px; }
+        .bg-orb-2 { width: 500px; height: 500px; background: var(--accent); bottom: -150px; left: -150px; animation-delay: -7s; }
+        .bg-orb-3 { width: 400px; height: 400px; background: #6366f1; top: 50%; left: 50%; animation-delay: -14s; }
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 10px) scale(1.02); }
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 0; transition: var(--transition);
+        }
+        .navbar.scrolled {
+            background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5); padding: 0.75rem 0;
+        }
+        .nav-container {
+            max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo {
+            display: flex; align-items: center; gap: 0.75rem;
+            text-decoration: none; color: var(--text);
+            font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em;
+        }
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        .logo-icon::before {
+            content: ''; position: absolute; inset: 2px;
+            background: var(--darker); border-radius: 8px;
+        }
+        .logo-icon svg { position: relative; z-index: 1; width: 20px; height: 20px; }
+        .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.9rem; font-weight: 500;
+            transition: var(--transition); position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white; padding: 0.6rem 1.5rem; border-radius: 8px;
+            font-weight: 600; font-size: 0.9rem; text-decoration: none;
+            transition: var(--transition); border: none; cursor: pointer;
+            box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+        }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 0.5rem; }
+
+        .hero {
+            position: relative; min-height: 100vh; display: flex; align-items: center;
+            padding: 8rem 0 4rem; overflow: hidden;
+        }
+        .hero-container {
+            max-width: 1280px; margin: 0 auto; padding: 0 2rem; width: 100%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2);
+            padding: 0.5rem 1rem; border-radius: 100px;
+            font-size: 0.85rem; font-weight: 500; color: var(--primary-light);
+            margin-bottom: 1.5rem; animation: fadeInUp 0.6s ease-out;
+        }
+        .hero-badge .pulse {
+            width: 8px; height: 8px; background: var(--success);
+            border-radius: 50%; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900;
+            line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--gradient-start), var(--accent), #a78bfa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero p {
+            font-size: 1.2rem; color: var(--text-muted);
+            max-width: 540px; margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+        .hero-ctas {
+            display: flex; gap: 1rem; flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white; padding: 1rem 2rem; border-radius: var(--radius);
+            font-weight: 600; font-size: 1rem; text-decoration: none;
+            transition: var(--transition); border: none; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4); }
+        .btn-secondary {
+            background: transparent; color: var(--text); padding: 1rem 2rem;
+            border-radius: var(--radius); font-weight: 600; font-size: 1rem;
+            text-decoration: none; transition: var(--transition);
+            border: 1px solid var(--dark-border); cursor: pointer;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--primary); }
+        .hero-visual { position: relative; animation: fadeInUp 0.6s ease-out 0.4s both; }
+        .hero-visual-inner {
+            position: relative; width: 100%; aspect-ratio: 1;
+            max-width: 500px; margin: 0 auto;
+        }
+        .shield-ring {
+            position: absolute; inset: 0;
+            border: 2px solid rgba(14, 165, 233, 0.1); border-radius: 50%;
+            animation: rotate 30s linear infinite;
+        }
+        .shield-ring::before {
+            content: ''; position: absolute; inset: 40px;
+            border: 2px solid rgba(14, 165, 233, 0.15); border-radius: 50%;
+            animation: rotate 20s linear infinite reverse;
+        }
+        .shield-ring::after {
+            content: ''; position: absolute; inset: 80px;
+            border: 2px solid rgba(14, 165, 233, 0.2); border-radius: 50%;
+            animation: rotate 15s linear infinite;
+        }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .shield-center {
+            position: absolute; inset: 50%; transform: translate(-50%, -50%);
+            width: 120px; height: 120px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(6, 182, 212, 0.2));
+            border: 2px solid rgba(14, 165, 233, 0.3); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-glow);
+        }
+        .shield-center svg { width: 50px; height: 50px; color: var(--primary-light); }
+        .orbit-dot { position: absolute; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 20px rgba(14, 165, 233, 0.5); }
+        .orbit-dot-1 { top: 0; left: 50%; transform: translateX(-50%); }
+        .orbit-dot-2 { bottom: 15%; right: 15%; }
+        .orbit-dot-3 { bottom: 15%; left: 15%; }
+        .hero-stats {
+            display: flex; gap: 2rem; margin-top: 3rem;
+            padding-top: 2rem; border-top: 1px solid var(--dark-border);
+            animation: fadeInUp 0.6s ease-out 0.5s both;
+        }
+        .hero-stat { display: flex; flex-direction: column; }
+        .hero-stat-value { font-size: 1.75rem; font-weight: 800; color: var(--text); font-family: 'JetBrains Mono', monospace; }
+        .hero-stat-label { font-size: 0.85rem; color: var(--text-dim); }
+
+        .trust-bar { padding: 3rem 0; border-top: 1px solid var(--dark-border); border-bottom: 1px solid var(--dark-border); background: rgba(15, 23, 42, 0.5); }
+        .trust-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+        .trust-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 1.5rem; }
+        .trust-logos { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; }
+        .trust-logo {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            color: var(--text-dim); padding: 0.5rem 1rem;
+            border: 1px solid var(--dark-border); border-radius: 6px;
+            background: rgba(30, 41, 59, 0.5); transition: var(--transition);
+        }
+        .trust-logo:hover { border-color: var(--primary); color: var(--primary-light); }
+
+        section { position: relative; z-index: 1; }
+        .section-header { text-align: center; max-width: 640px; margin: 0 auto 4rem; }
+        .section-label {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--primary); margin-bottom: 1rem; padding: 0.35rem 0.75rem;
+            background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 6px;
+        }
+        .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .section-desc { font-size: 1.1rem; color: var(--text-muted); }
+
+        .services { padding: 6rem 0; }
+        .services-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .service-card {
+            background: var(--dark-card); border: 1px solid var(--dark-border);
+            border-radius: var(--radius-lg); padding: 2rem;
+            transition: var(--transition); position: relative; overflow: hidden; cursor: pointer;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            transform: scaleX(0); transition: var(--transition);
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card:hover {
+            transform: translateY(-5px); border-color: rgba(14, 165, 233, 0.3);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+        }
+        .service-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(6, 182, 212, 0.15));
+            border: 1px solid rgba(14, 165, 233, 0.2); border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem; transition: var(--transition);
+        }
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); border-color: transparent;
+        }
+        .service-icon svg { width: 26px; height: 26px; color: var(--primary-light); transition: var(--transition); }
+        .service-card:hover .service-icon svg { color: white; }
+        .service-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .service-features { list-style: none; }
+        .service-features li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+        .service-features li svg { width: 16px; height: 16px; color: var(--success); flex-shrink: 0; }
+
+        .why-us { padding: 6rem 0; background: linear-gradient(180deg, transparent, rgba(14, 165, 233, 0.03), transparent); }
+        .why-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .why-visual { position: relative; }
+        .why-visual-card {
+            background: var(--dark-card); border: 1px solid var(--dark-border);
+            border-radius: var(--radius-lg); padding: 2rem; position: relative; overflow: hidden;
+        }
+        .why-visual-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(14, 165, 233, 0.1), transparent 30%);
+            animation: spin 4s linear infinite;
+        }
+        .why-visual-card-inner { position: relative; z-index: 1; background: var(--dark-card); border-radius: calc(var(--radius-lg) - 2px); padding: 2rem; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .metric-row { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--dark-border); }
+        .metric-row:last-child { border-bottom: none; }
+        .metric-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .metric-icon.green { background: rgba(16, 185, 129, 0.15); }
+        .metric-icon.blue { background: rgba(14, 165, 233, 0.15); }
+        .metric-icon.purple { background: rgba(139, 92, 246, 0.15); }
+        .metric-icon.orange { background: rgba(245, 158, 11, 0.15); }
+        .metric-icon svg { width: 20px; height: 20px; }
+        .metric-icon.green svg { color: var(--success); }
+        .metric-icon.blue svg { color: var(--primary); }
+        .metric-icon.purple svg { color: #a78bfa; }
+        .metric-icon.orange svg { color: var(--warning); }
+        .metric-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .metric-info span { font-size: 0.8rem; color: var(--text-dim); }
+        .why-content h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; }
+        .why-content > p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem; }
+        .why-features { display: flex; flex-direction: column; gap: 1.25rem; }
+        .why-feature { display: flex; gap: 1rem; }
+        .why-feature-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(6, 182, 212, 0.15));
+            border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .why-feature-icon svg { width: 18px; height: 18px; color: var(--primary-light); }
+        .why-feature h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .why-feature p { font-size: 0.9rem; color: var(--text-muted); }
+
+        .stats { padding: 4rem 0; background: var(--dark); border-top: 1px solid var(--dark-border); border-bottom: 1px solid var(--dark-border); }
+        .stats-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .stat-item { text-align: center; padding: 1.5rem; }
+        .stat-number {
+            font-size: 2.5rem; font-weight: 900; font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--gradient-start), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+
+        .testimonials { padding: 6rem 0; }
+        .testimonials-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .testimonial-card {
+            background: var(--dark-card); border: 1px solid var(--dark-border);
+            border-radius: var(--radius-lg); padding: 2rem;
+            transition: var(--transition); position: relative;
+        }
+        .testimonial-card:hover { border-color: rgba(14, 165, 233, 0.3); transform: translateY(-3px); }
+        .testimonial-stars { display: flex; gap: 0.25rem; margin-bottom: 1rem; }
+        .testimonial-stars svg { width: 16px; height: 16px; color: var(--warning); fill: var(--warning); }
+        .testimonial-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .testimonial-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.9rem; color: white;
+        }
+        .testimonial-author-info h4 { font-size: 0.95rem; font-weight: 600; }
+        .testimonial-author-info span { font-size: 0.8rem; color: var(--text-dim); }
+
+        .cta-section { padding: 6rem 0; position: relative; overflow: hidden; }
+        .cta-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(6, 182, 212, 0.05));
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+        .cta-container { max-width: 800px; margin: 0 auto; padding: 0 2rem; text-align: center; position: relative; z-index: 1; }
+        .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-phone { display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.9rem; margin-top: 1.5rem; }
+        .cta-phone a { color: var(--primary-light); text-decoration: none; font-weight: 600; transition: var(--transition); }
+        .cta-phone a:hover { color: var(--text); }
+
+        .contact { padding: 6rem 0; background: var(--dark); border-top: 1px solid var(--dark-border); }
+        .contact-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contact-info h2 { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
+        .contact-info > p { color: var(--text-muted); margin-bottom: 2rem; }
+        .contact-methods { display: flex; flex-direction: column; gap: 1.25rem; }
+        .contact-method { display: flex; align-items: flex-start; gap: 1rem; }
+        .contact-method-icon {
+            width: 44px; height: 44px; background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .contact-method-icon svg { width: 20px; height: 20px; color: var(--primary-light); }
+        .contact-method h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .contact-method p, .contact-method a { font-size: 0.9rem; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+        .contact-method a:hover { color: var(--primary-light); }
+        .contact-form {
+            background: var(--dark-card); border: 1px solid var(--dark-border);
+            border-radius: var(--radius-lg); padding: 2rem;
+        }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 0.875rem 1rem; background: var(--dark);
+            border: 1px solid var(--dark-border); border-radius: 8px;
+            color: var(--text); font-family: inherit; font-size: 0.95rem; transition: var(--transition);
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-dim); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-submit {
+            width: 100%; background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white; padding: 1rem; border: none; border-radius: 8px;
+            font-weight: 600; font-size: 1rem; cursor: pointer; transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+        }
+        .form-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4); }
+
+        .footer { padding: 4rem 0 2rem; border-top: 1px solid var(--dark-border); background: var(--darker); }
+        .footer-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand p { color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem; max-width: 300px; }
+        .footer-col h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 1.25rem; color: var(--text); }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.75rem; }
+        .footer-col a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: var(--transition); }
+        .footer-col a:hover { color: var(--primary-light); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--dark-border); flex-wrap: wrap; gap: 1rem; }
+        .footer-bottom p { font-size: 0.85rem; color: var(--text-dim); }
+        .footer-social { display: flex; gap: 1rem; }
+        .footer-social a {
+            width: 36px; height: 36px; background: var(--dark-card);
+            border: 1px solid var(--dark-border); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); transition: var(--transition);
+        }
+        .footer-social a:hover { background: rgba(14, 165, 233, 0.1); border-color: var(--primary); color: var(--primary-light); }
+        .footer-social svg { width: 16px; height: 16px; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        .mobile-menu {
+            position: fixed; inset: 0; background: rgba(2, 6, 23, 0.98);
+            backdrop-filter: blur(20px); z-index: 999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 2rem; transform: translateX(100%); transition: transform 0.3s ease-out;
+        }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.5rem; font-weight: 600; }
+        .mobile-menu-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--text); cursor: pointer; }
+
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-ctas { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .why-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .contact-container { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .stats-container { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--darker); }
+        ::-webkit-scrollbar-thumb { background: var(--dark-border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                </div>
+                Sentinels
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#why-us" class="mobile-link">Why Us</a>
+        <a href="#testimonials" class="mobile-link">Testimonials</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <a href="#contact" class="btn-primary">Get Started</a>
+    </div>
+
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="pulse"></span>
+                    24/7 Security Monitoring Active
+                </div>
+                <h1>
+                    Your Technology.<br>
+                    <span class="gradient-text">Protected.</span><br>
+                    Optimized. Future-Ready.
+                </h1>
+                <p>Enterprise IT solutions and cybersecurity services that keep your business secure, compliant, and running at peak performance so you can focus on what you do best.</p>
+                <div class="hero-ctas">
+                    <a href="#contact" class="btn-primary">
+                        Get a Security Assessment
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                    <a href="#services" class="btn-secondary">
+                        Explore Our Services
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">500+</span>
+                        <span class="hero-stat-label">Clients Protected</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">99.9%</span>
+                        <span class="hero-stat-label">Uptime Guaranteed</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">&lt;5min</span>
+                        <span class="hero-stat-label">Avg Response Time</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-visual-inner">
+                    <div class="shield-ring"></div>
+                    <div class="shield-center">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="orbit-dot orbit-dot-1"></div>
+                    <div class="orbit-dot orbit-dot-2"></div>
+                    <div class="orbit-dot orbit-dot-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-bar">
+        <div class="trust-container">
+            <p class="trust-label">Trusted by businesses across industries</p>
+            <div class="trust-logos">
+                <span class="trust-logo">SOC 2 Compliant</span>
+                <span class="trust-logo">ISO 27001</span>
+                <span class="trust-logo">HIPAA Ready</span>
+                <span class="trust-logo">NIST Aligned</span>
+                <span class="trust-logo">GDPR Aware</span>
+            </div>
+        </div>
+    </section>
+    <section class="services" id="services">
+        <div class="services-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Our Services</span>
+                <h2 class="section-title">Complete Technology Protection</h2>
+                <p class="section-desc">From proactive monitoring to incident response, we cover every layer of your technology stack.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                            <path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/>
+                        </svg>
+                    </div>
+                    <h3>Managed IT Services</h3>
+                    <p>End-to-end IT management with 24/7 monitoring, helpdesk support, and infrastructure optimization.</p>
+                    <ul class="service-features">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>24/7 Network Monitoring</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Remote & On-Site Support</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Patch & Update Management</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor Management</li>
+                    </ul>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Cybersecurity</h3>
+                    <p>Multi-layered security strategies that detect, prevent, and respond to threats before they impact your business.</p>
+                    <ul class="service-features">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Threat Detection & Response</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Security Awareness Training</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vulnerability Assessments</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Incident Response Planning</li>
+                    </ul>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                        </svg>
+                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Seamless cloud migration, architecture design, and ongoing optimization for AWS, Azure, and Google Cloud.</p>
+                    <ul class="service-features">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cloud Migration Strategy</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Hybrid & Multi-Cloud Architecture</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cost Optimization</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Disaster Recovery & Backup</li>
+                    </ul>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Compliance & Risk</h3>
+                    <p>Navigate complex regulatory landscapes with confidence. We help you achieve and maintain compliance.</p>
+                    <ul class="service-features">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>HIPAA, SOC 2, PCI-DSS</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Policy Development</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Audit Preparation</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Risk Assessment & Reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us" id="why-us">
+        <div class="why-container">
+            <div class="why-grid">
+                <div class="why-visual animate-on-scroll">
+                    <div class="why-visual-card">
+                        <div class="why-visual-card-inner">
+                            <div class="metric-row">
+                                <div class="metric-icon green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                        <polyline points="22 4 12 14.01 9 11.01"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <h4>Threats Blocked</h4>
+                                    <span>12,847 this month</span>
+                                </div>
+                            </div>
+                            <div class="metric-row">
+                                <div class="metric-icon blue">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12 6 12 12 16 14"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <h4>Avg Response Time</h4>
+                                    <span>4 minutes 32 seconds</span>
+                                </div>
+                            </div>
+                            <div class="metric-row">
+                                <div class="metric-icon purple">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <h4>Cost Savings</h4>
+                                    <span>$2.4M saved for clients YTD</span>
+                                </div>
+                            </div>
+                            <div class="metric-row">
+                                <div class="metric-icon orange">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="9" cy="7" r="4"/>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                    </svg>
+                                </div>
+                                <div class="metric-info">
+                                    <h4>Client Satisfaction</h4>
+                                    <span>98.7% retention rate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="why-content animate-on-scroll">
+                    <h2>Why Businesses Choose Sentinels</h2>
+                    <p>We do not just fix problems, we prevent them. Our proactive approach means fewer disruptions, lower costs, and peace of mind for your leadership team.</p>
+                    <div class="why-features">
+                        <div class="why-feature">
+                            <div class="why-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Security-First by Design</h4>
+                                <p>Every solution we build starts with security. No shortcuts, no afterthoughts.</p>
+                            </div>
+                        </div>
+                        <div class="why-feature">
+                            <div class="why-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Proactive, Not Reactive</h4>
+                                <p>We identify and resolve issues before they impact your operations.</p>
+                            </div>
+                        </div>
+                        <div class="why-feature">
+                            <div class="why-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 6v6l4 2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Real Humans, Real Fast</h4>
+                                <p>Average response time under 5 minutes. No phone trees, no bots.</p>
+                            </div>
+                        </div>
+                        <div class="why-feature">
+                            <div class="why-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="2" x2="12" y2="22"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Scales With You</h4>
+                                <p>From 10 employees to 10,000. Our solutions grow as you grow.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item animate-on-scroll">
+                <div class="stat-number" data-target="500">0</div>
+                <div class="stat-label">Clients Protected</div>
+            </div>
+            <div class="stat-item animate-on-scroll">
+                <div class="stat-number" data-target="99.9">0</div>
+                <div class="stat-label">% Uptime Guaranteed</div>
+            </div>
+            <div class="stat-item animate-on-scroll">
+                <div class="stat-number" data-target="15">0</div>
+                <div class="stat-label">Years of Experience</div>
+            </div>
+            <div class="stat-item animate-on-scroll">
+                <div class="stat-number" data-target="24">0</div>
+                <div class="stat-label">/7 Support Available</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Testimonials</span>
+                <h2 class="section-title">Trusted by Industry Leaders</h2>
+                <p class="section-desc">Do not just take our word for it. Here is what our clients say about working with Sentinels.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <p class="testimonial-text">Sentinels transformed our IT infrastructure. Their proactive monitoring caught a critical vulnerability before it became a breach. Response time is incredible.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MR</div>
+                        <div class="testimonial-author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <span>CTO, Meridian Health Partners</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <p class="testimonial-text">Moving to the cloud felt overwhelming until Sentinels mapped out our migration. Zero downtime, under budget, and our team productivity jumped 40%.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SC</div>
+                        <div class="testimonial-author-info">
+                            <h4>Sarah Chen</h4>
+                            <span>VP Operations, Apex Logistics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <p class="testimonial-text">The compliance expertise at Sentinels is unmatched. They guided us through our SOC 2 audit in half the time we expected. Truly a strategic partner.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">DW</div>
+                        <div class="testimonial-author-info">
+                            <h4>David Williams</h4>
+                            <span>CEO, FinTrust Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Ready to Secure Your Technology?</h2>
+            <p>Schedule a free security assessment and discover how Sentinels can protect and optimize your business technology.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn-primary">
+                    Schedule Free Assessment
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+                <a href="tel:+15551234567" class="btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    Call Us Now
+                </a>
+            </div>
+            <div class="cta-phone">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                Or call us directly at <a href="tel:+15551234567">(555) 123-4567</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info animate-on-scroll">
+                <h2>Get In Touch</h2>
+                <p>Ready to discuss your IT and security needs? Fill out the form or reach out directly. We respond within 24 hours.</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <a href="tel:+15551234567">(555) 123-4567</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <a href="mailto:hello@sentinelsts.com">hello@sentinelsts.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Office</h4>
+                            <p>123 Technology Drive, Suite 400<br>San Francisco, CA 94105</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Hours</h4>
+                            <p>Mon - Fri: 8:00 AM - 6:00 PM<br>24/7 Emergency Support Available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form animate-on-scroll">
+                <form id="contactForm" action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company" placeholder="Your Company Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Interest</label>
+                        <select id="service" name="service">
+                            <option value="">Select a service...</option>
+                            <option value="managed-it">Managed IT Services</option>
+                            <option value="cybersecurity">Cybersecurity</option>
+                            <option value="cloud">Cloud Solutions</option>
+                            <option value="compliance">Compliance & Risk</option>
+                            <option value="consulting">IT Consulting</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your project or needs..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        Send Message
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 0.5rem;">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="m9 12 2 2 4-4"/>
+                            </svg>
+                        </div>
+                        Sentinels
+                    </a>
+                    <p>Enterprise IT solutions and cybersecurity services that keep your business secure, compliant, and running at peak performance.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Managed IT</a></li>
+                        <li><a href="#services">Cybersecurity</a></li>
+                        <li><a href="#services">Cloud Solutions</a></li>
+                        <li><a href="#services">Compliance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#why-us">About Us</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Security Reports</a></li>
+                        <li><a href="#">Support Portal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sentinels Technology Services. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                            <path d="M9 18c-4.51 2-5-2-7-2"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseFloat(entry.target.dataset.target);
+                    const isDecimal = target % 1 !== 0;
+                    const duration = 2000;
+                    const start = performance.now();
+
+                    function update(currentTime) {
+                        const elapsed = currentTime - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+                        const current = target * easeOut;
+
+                        if (isDecimal) {
+                            entry.target.textContent = current.toFixed(1);
+                        } else {
+                            entry.target.textContent = Math.floor(current);
+                        }
+
+                        if (progress < 1) {
+                            requestAnimationFrame(update);
+                        } else {
+                            entry.target.textContent = isDecimal ? target.toFixed(1) : target;
+                        }
+                    }
+
+                    requestAnimationFrame(update);
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number').forEach(el => {
+            statObserver.observe(el);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
